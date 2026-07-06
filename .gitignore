@@ -1,0 +1,25 @@
+# Node
+node_modules/
+
+# Logs
+logs
+*.log
+
+# Variables de entorno
+.env
+
+# Vite
+frontend/dist
+
+# Backend
+backend/dist
+
+# Prisma
+backend/prisma/dev.db
+
+# VS Code
+.vscode/
+
+# Sistema
+.DS_Store
+Thumbs.db
