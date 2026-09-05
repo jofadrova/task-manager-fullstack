@@ -14,7 +14,7 @@ app.use(cors());
 app.use(express.json());
 
 app.get("/", (req: any, res: any) => {
-    res.send("🚀 Task Manager API");
+    res.send("BACKEND corriendo !!!");
 });
 
 app.listen(PORT, () => {
@@ -26,7 +26,6 @@ app.post("/register", async (req: any, res: any) => {
     try {
 
         const { nombre, username, password } = req.body;
-
         // Verificar si el usuario ya existe
         const existingUser = await prisma.user.findUnique({
             where: {
@@ -39,10 +38,8 @@ app.post("/register", async (req: any, res: any) => {
                 message: "El nombre de usuario ya existe"
             });
         }
-
         // Encriptar contraseña
         const hashedPassword = await bcrypt.hash(password, 10);
-
         // Crear usuario
         const user = await prisma.user.create({
             data: {
@@ -57,23 +54,17 @@ app.post("/register", async (req: any, res: any) => {
         });
 
     } catch (error) {
-
         console.error(error);
-
         res.status(500).json({
             message: "Error del servidor"
         });
-
     }
 
 });
 
 app.post("/login", async (req: any, res: any) => {
-
     try {
-
         const { username, password } = req.body;
-
         // Buscar usuario
         const user = await prisma.user.findUnique({
             where: {
@@ -111,7 +102,6 @@ app.post("/login", async (req: any, res: any) => {
             }
 
         );
-
         res.json({
             message: "Login correcto",
             token,
@@ -127,49 +117,34 @@ app.post("/login", async (req: any, res: any) => {
         res.status(500).json({
             message: "Error del servidor"
         });
-
     }
-
 });
 
 app.get("/profile", (req: any, res: any) => {
-
     // Leer el encabezado Authorization
     const authHeader = req.headers.authorization;
-
     if (!authHeader) {
-
         return res.status(401).json({
             message: "No se envió el token"
         });
-
     }
-
     // Obtener solo el token
     const token = authHeader.split(" ")[1];
-
     try {
-
         // Verificar el token
         const decoded = jwt.verify(token, SECRET_KEY);
-
         res.json({
             message: "Perfil del usuario",
             user: decoded
         });
-
     } catch (error) {
-
         res.status(401).json({
             message: "Token inválido"
         });
-
     }
-
 });
 
 app.post("/tasks", async (req: any, res: any) => {
-
     const authHeader = req.headers.authorization;
 
     if (!authHeader) {

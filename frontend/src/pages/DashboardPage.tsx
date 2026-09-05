@@ -22,7 +22,6 @@ const pendingTasks = totalTasks - completedTasks;
     const loadTasks = async () => {
         try {
             const data = await getTasks();
-            console.log("Tareas recibidas:", data);
             setTasks(data);
         } catch (error) {
             console.error("Error cargando tareas:", error);
