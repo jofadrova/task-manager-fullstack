@@ -141,3 +141,4 @@ El proyecto utiliza **PostgreSQL** como sistema gestor de base de datos y **Pris
 **Jose Droguett**
 
 Proyecto desarrollado como parte del proceso de formación en desarrollo Full Stack e Integración y Despliegue Continuo.
+# prueba de proteccion
