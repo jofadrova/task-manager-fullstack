@@ -2,8 +2,7 @@
 
 Aplicación web Full Stack para la gestión de tareas y usuarios. Permite registrar y autenticar usuarios, así como crear y administrar tareas mediante una interfaz desarrollada con React y una API REST construida con Express.
 
-![.github/workflows/ci.yml](https://github.com/jofadrova/task-manager-fullstack/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/jofadrova/task-manager-fullstack/actions/workflows/ci.yml)
-
+[![.github/workflows/ci.yml](https://github.com/jofadrova/task-manager-fullstack/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/jofadrova/task-manager-fullstack/actions/workflows/ci.yml)]
 ##Tecnologías utilizadas
 
 ### Frontend
