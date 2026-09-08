@@ -8,7 +8,6 @@ function LoginPage() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
-    const pruebaCI = "fallo intencional";
 
 const handleLogin = async () => {
     if (!username.trim() || !password.trim()) {
