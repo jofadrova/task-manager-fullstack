@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { register } from "../services/authService";
+import axios from "axios";
 
 function RegisterPage() {
 
@@ -32,12 +33,13 @@ function RegisterPage() {
 
             alert("Usuario registrado correctamente");
             navigate("/");
-        } catch (error: any) {
-            alert(
-                error.response?.data?.message ||
-                "No se pudo registrar el usuario"
-            );
-        }
+        } catch (error: unknown) {
+    if (axios.isAxiosError(error)) {
+        alert(error.response?.data?.message || "Error al registrar usuario");
+    } else {
+        alert("Error al registrar usuario");
+    }
+}
     };
     return (
         <div className="container vh-100 d-flex justify-content-center align-items-center">

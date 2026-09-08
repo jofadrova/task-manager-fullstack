@@ -72,14 +72,25 @@ const handleLogout = () => {
     localStorage.removeItem("user");
     navigate("/");
 };
-  useEffect(() => {
+ useEffect(() => {
     const token = localStorage.getItem("token");
+
     if (!token) {
         navigate("/");
         return;
     }
-    loadTasks();
-}, []);
+
+    const fetchTasks = async () => {
+        try {
+            const data = await getTasks();
+            setTasks(data);
+        } catch (error) {
+            console.error("Error cargando tareas:", error);
+        }
+    };
+
+    fetchTasks();
+}, [navigate]);
 
 return (
     <div className="container py-5">
