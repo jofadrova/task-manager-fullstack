@@ -41,7 +41,7 @@ app.post("/register", async (req: any, res: any) => {
         // Encriptar contraseña
         const hashedPassword = await bcrypt.hash(password, 10);
         // Crear usuario
-        const user = await prisma.user.create({
+        await prisma.user.create({
             data: {
                 nombre,
                 username,
@@ -137,11 +137,9 @@ app.get("/profile", (req: any, res: any) => {
             message: "Perfil del usuario",
             user: decoded
         });
-    } catch (error) {
-        res.status(401).json({
-            message: "Token inválido"
-        });
-    }
+    } catch {
+    res.status(500).json({ message: "Token invalido" });
+}
 });
 
 app.post("/tasks", async (req: any, res: any) => {
@@ -183,15 +181,9 @@ app.post("/tasks", async (req: any, res: any) => {
 
         });
 
-    } catch (error) {
-
-        res.status(401).json({
-
-            message: "Token inválido"
-
-        });
-
-    }
+    } catch {
+    res.status(500).json({ message: "Token invalido" });
+}
 
 });
 
@@ -227,13 +219,9 @@ app.get("/tasks", async (req: any, res: any) => {
 
         res.json(tasks);
 
-    } catch (error) {
-
-        res.status(401).json({
-            message: "Token inválido"
-        });
-
-    }
+    } catch {
+    res.status(500).json({ message: "Error...Token invalido" });
+}
 
 });
 
@@ -294,13 +282,9 @@ app.put("/tasks/:id", async (req: any, res: any) => {
             task: updatedTask
         });
 
-    } catch (error) {
-
-        res.status(401).json({
-            message: "Token inválido"
-        });
-
-    }
+    } catch {
+    res.status(500).json({ message: "Error...token invalido" });
+}
 
 });
 

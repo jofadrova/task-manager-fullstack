@@ -26,7 +26,7 @@ export const createTask = async (text: string) => {
 
 export const updateTask = async (
     id: number,
-    data: any) => {
+    data: unknown) => {
     const token = localStorage.getItem("token");
     const response = await api.put(
         `/tasks/${id}`,

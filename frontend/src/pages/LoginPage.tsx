@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { login } from "../services/authService";
+import axios from "axios";
 
 function LoginPage() {
     const [username, setUsername] = useState("");
@@ -28,10 +29,12 @@ const handleLogin = async () => {
         );
 
         navigate("/dashboard");
-    } catch (error:any) {
-        alert(error.response?.data?.message || "Error al iniciar sesión"
-    );
-
+    } catch (error: unknown) {
+        if (axios.isAxiosError(error)) {
+            alert(error.response?.data?.message || "Error al iniciar sesión");
+        } else {
+            alert("Error al iniciar sesión");
+        }
     }
 
 };
