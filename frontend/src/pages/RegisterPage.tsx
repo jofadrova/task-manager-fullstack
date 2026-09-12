@@ -32,12 +32,17 @@ function RegisterPage() {
 
             alert("Usuario registrado correctamente");
             navigate("/");
-        } catch (error: any) {
-            alert(
-                error.response?.data?.message ||
-                "No se pudo registrar el usuario"
-            );
-        }
+        } catch (error: unknown) {
+    const message =
+        typeof error === "object" &&
+        error !== null &&
+        "response" in error
+            ? (error as { response?: { data?: { message?: string } } })
+                .response?.data?.message
+            : undefined;
+
+    alert(message || "No se pudo registrar el usuario");
+}
     };
     return (
         <div className="container vh-100 d-flex justify-content-center align-items-center">
