@@ -28,11 +28,17 @@ const handleLogin = async () => {
         );
 
         navigate("/dashboard");
-    } catch (error:any) {
-        alert(error.response?.data?.message || "Error al iniciar sesión"
-    );
+    } catch (error: unknown) {
+    const message =
+        typeof error === "object" &&
+        error !== null &&
+        "response" in error
+            ? (error as { response?: { data?: { message?: string } } })
+                .response?.data?.message
+            : undefined;
 
-    }
+    alert(message || "Error al iniciar sesión");
+}
 
 };
 
