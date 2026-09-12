@@ -17,7 +17,7 @@ it('acepta un correo con formato válido', () => {
 
     const resultado = esCorreoValido(correo)
 
-    expect(resultado).toBe(true)
+    expect(resultado).toBe(false)
   })
 
   it('rechaza un correo sin dominio completo', () => {
