@@ -118,4 +118,4 @@ jobs:
         working-directory: ./frontend
         run: npx playwright test
 
-No newline at end of file
+
