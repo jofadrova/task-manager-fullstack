@@ -9,7 +9,7 @@ describe("POST /tasks", () => {
         id: 1,
         username: "usuario-prueba"
       },
-      "taskmanager_secret"
+      process.env.JWT_SECRET
     );
 
     const res = await request(app)
