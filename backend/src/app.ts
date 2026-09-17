@@ -7,7 +7,11 @@ const { PrismaClient } = require("@prisma/client");
 const app = express();
 
 const prisma = new PrismaClient();
-const SECRET_KEY = "taskmanager_secret";
+const SECRET_KEY = process.env.JWT_SECRET;
+
+if (!SECRET_KEY) {
+  throw new Error("JWT_SECRET no está definido");
+}
 
 app.use(cors());
 app.use(express.json());
