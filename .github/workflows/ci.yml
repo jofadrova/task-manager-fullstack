@@ -10,6 +10,7 @@ jobs:
   frontend:
     name: Frontend - Lint & Build
     runs-on: ubuntu-latest
+
     defaults:
       run:
         working-directory: ./frontend
@@ -30,6 +31,7 @@ jobs:
   backend:
     name: Backend - Lint & Build
     runs-on: ubuntu-latest
+
     defaults:
       run:
         working-directory: ./backend
@@ -50,6 +52,7 @@ jobs:
   pruebas:
     name: Pruebas unitarias y cobertura
     runs-on: ubuntu-latest
+
     defaults:
       run:
         working-directory: ./frontend
@@ -153,7 +156,7 @@ jobs:
 
     env:
       DATABASE_URL: postgresql://testuser:testpass@localhost:5432/testdb
-    
+
     steps:
       - uses: actions/checkout@v4
 
@@ -164,5 +167,22 @@ jobs:
           cache-dependency-path: backend/package-lock.json
 
       - run: npm ci
-
       - run: npx prisma migrate deploy
+      - run: npx prisma db seed
+
+  deploy-staging:
+    name: Deploy a Staging
+    needs: [frontend, backend, pruebas, e2e, migraciones]
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Instalar Railway CLI
+        run: npm install -g @railway/cli
+
+      - name: Desplegar a Railway (staging)
+        run: railway up --service backend --environment staging
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
