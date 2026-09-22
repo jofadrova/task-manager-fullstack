@@ -1,6 +1,6 @@
 const app = require("./app");
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 app.get('/health', (_req: any, res: any) => {
   res.status(200).json({ status: 'ok' });
