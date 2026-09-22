@@ -17,7 +17,7 @@ app.use(cors());
 app.use(express.json());
 
 app.get("/", (req: any, res: any) => {
-    res.send("BACKEND corriendo !!!");
+    res.send("BACKEND corriendo !!! - Verificación final");
 });
 
 app.post("/register", async (req: any, res: any) => {
